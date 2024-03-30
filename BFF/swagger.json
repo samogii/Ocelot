@@ -1,0 +1,19 @@
+{
+  "swagger": "2.0",
+  [
+    {
+      "Key": "projects",
+      "RemoveUnusedComponentsFromScheme": false,
+      "Config": [
+        {
+          "Name": "Projects API",
+          "Version": "v1",
+          "Service": {
+            "Name": "projects",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    }
+  ]
+}
