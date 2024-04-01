@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/WeatherForeCast/{id}",
+      "DownstreamPathTemplate": "/WeatherForeCast",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,14 +9,36 @@
           "Port": 5000
         }
       ],
-      "UpstreamPathTemplate": "/play/{id}",
+      "UpstreamPathTemplate": "/play",
       "UpstreamHttpMethod": [ "GET" ],
+      "Key": "Play",
+      "SwaggerKey": "PlayGround"
+    },
+    {
+      "DownstreamPathTemplate": "/api/play",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/play1",
+      "UpstreamHttpMethod": [ "GET" ],
+      "Key": "Play1",
       "SwaggerKey": "PlayGround"
     }
   ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7000"
-  },
+  "Aggregates": [
+    {
+      "UpstreamPathTemplate": "/okok",
+      "RouteKeys": [
+        "Play",
+        "Play1"
+      ],
+      "Aggregator": "FakeAggregator"
+    }
+  ],
   "SwaggerEndPoints": [
     {
       "Key": "PlayGround",
@@ -28,5 +50,8 @@
         }
       ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  }
 }

@@ -1,3 +1,4 @@
+using BFF;
 using Microsoft.Extensions.Configuration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -13,8 +14,8 @@ builder.Services.AddControllers();
 //builder.Services.AddSwaggerGen();
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
-builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddOcelot(builder.Configuration).AddTransientDefinedAggregator<FakeAggregator>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,5 +35,5 @@ app.UseSwaggerForOcelotUI(opt =>
 });
 
 app.MapControllers();
-await app.UseOcelot();
+app.UseOcelot().Wait();
 app.Run();
